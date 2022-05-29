@@ -2,21 +2,12 @@
   <div id="view-courses-window">
     <div id="header">
       <h1>{{ this.$store.getters.activeCourse.name }}</h1>
-      <p id="course-description">{{ activeCourse.description }}</p>
-      <p id="date">{{ this.$store.getters.activeCourse.date }}</p>
       <div id="button-box">
-        <div class="button">Edit Course</div>
-        <button @click="setWindowToAddTask" class="button">+ Add Task</button>
+        <div class="button">Discard Course</div>
+        <button @click="setWindowToAddTask" class="button">Save Course</button>
       </div>
     </div>
-    <div class="content">
-      <DeadlineDescription
-        id="deadline-description"
-        v-for="task in this.$store.getters.activeCourseTasks"
-        :key="task.name"
-        :task="task"
-      />
-    </div>
+    <div class="content"></div>
   </div>
 </template>
 <script lang="ts">

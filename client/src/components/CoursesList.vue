@@ -2,12 +2,36 @@
   <div id="courses-window">
     <h2>Courses</h2>
     <div id="courses-list">
-      <p class="course-name">Course 1</p>
-      <p class="course-name">Course 2</p>
-      <p class="course-name">Course 3</p>
+      <p
+        v-for="course in this.$store.state.courses"
+        :key="course.name"
+        class="course-name"
+        @click="setActiveCourse(course.name)"
+      >
+        {{ course.name }}
+      </p>
+      <button
+        id="add-course"
+        @click="this.$store.dispatch('showEditCourseWindow')"
+      >
+        <p>+</p>
+      </button>
     </div>
   </div>
 </template>
+<script lang="ts">
+import Vue from "vue";
+export default {
+  methods: {
+    setWindowToAddTask() {
+      this.$store.dispatch("setTasksViewToAddTaskWindow");
+    },
+    setActiveCourse(course: string) {
+      this.$store.dispatch("setActiveCourseTo", course);
+    },
+  },
+};
+</script>
 <style lang="scss" scoped>
 #courses-window {
   display: grid;
@@ -33,11 +57,37 @@
   .course-name {
     font-size: large;
     font-weight: bold;
+
     &:hover {
       cursor: pointer;
     }
     &:active {
       cursor: grab;
+    }
+  }
+
+  #add-course {
+    display: inline-flex;
+    width: 100%;
+    height: 2em;
+    background-color: white;
+    border-radius: 10px;
+    border: 1.5px solid lightgray;
+
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      cursor: pointer;
+      background-color: #f2f2f2;
+    }
+    &:active {
+      cursor: grab;
+    }
+
+    p {
+      margin: 0;
+      font-size: 2em;
     }
   }
 }

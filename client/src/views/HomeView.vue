@@ -56,6 +56,7 @@ export default defineComponent({
         background-color: white;
         border-radius: 10px;
         border: 1.5px solid lightgray;
+        overflow-y: scroll;
       }
 
       h1 {

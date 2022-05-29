@@ -1,30 +1,40 @@
 <template>
   <div>
     <div id="date">
-      <p id="deadline">May 11 - 06:00</p>
-      <p id="timetodeadline">(1 d, 13h, 47 left)</p>
+      <p id="deadline">{{ task.deadline }}</p>
+      <p id="timetodeadline">time left</p>
     </div>
-    <h2 id="title">Paper prototype and heuristics</h2>
-    <div id="description">Placeholder text xddd</div>
-    <div class="button">Mark as done</div>
+    <h2 id="title">{{ task.name }}</h2>
+    <div id="description">{{ task.description }}</div>
+    <button
+      class="button"
+      @click="this.$store.dispatch('markTaskAsDone', task)"
+      id="done"
+    >
+      Mark as done
+    </button>
     <div id="footer">
-      <p id="eta">~4 hours</p>
-      <p id="points">20p/100p</p>
-      <p id="type">Group</p>
+      <p id="eta">~{{ task.eta }}h</p>
+      <p id="points">{{ task.points }}</p>
+      <p id="type">{{ task.groupwork ? "Group" : "Individual" }}</p>
     </div>
   </div>
 </template>
 <script lang="ts">
-export default {};
+export default {
+  props: {
+    task: Object,
+  },
+};
 </script>
 <style lang="scss" scoped>
 #deadline-description {
-  height: 60%;
+  height: auto;
   display: grid;
   grid-template:
     "deadline button" 10%
     "title button" 20%
-    "description description" 40%
+    "description description" auto
     "footer footer" 30%
     / 70% 30%;
 
@@ -34,6 +44,10 @@ export default {};
   border: 1.5px solid lightgray;
   background-color: white;
   border-radius: 10px;
+
+  .button:hover {
+    background-color: lightgreen;
+  }
 
   #date {
     grid-area: deadline;

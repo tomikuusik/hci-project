@@ -2,18 +2,21 @@
   <div class="container">
     <h1>Progression</h1>
     <div class="cover">
-      <div class="metrics">
-        <p class="description">HCI</p>
+      <div
+        class="metrics"
+        v-for="course in this.$store.state.courses"
+        :key="course.name"
+      >
+        <p class="description">{{ course.name }}</p>
         <div class="progressbar">
           <div class="total"></div>
-          <div class="progress"></div>
-        </div>
-      </div>
-      <div class="metrics">
-        <p class="description">Sysadmin</p>
-        <div class="progressbar">
-          <div class="total"></div>
-          <div class="progress"></div>
+          <div
+            class="progress"
+            :style="{
+              width: course.progress + '%',
+              backgroundColor: getColor(course.progress),
+            }"
+          ></div>
         </div>
       </div>
     </div>
@@ -22,7 +25,19 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 
-export default defineComponent({});
+export default defineComponent({
+  methods: {
+    getColor(points: number): string {
+      if (points > 50) {
+        return "lightgreen";
+      } else if (points > 25) {
+        return "yellow";
+      } else {
+        return "red";
+      }
+    },
+  },
+});
 </script>
 <style lang="scss" scoped>
 .metrics {
@@ -49,7 +64,7 @@ export default defineComponent({});
     .progress {
       position: absolute;
       background-color: lightgreen;
-      width: 65%;
+      width: 0%;
     }
   }
 }

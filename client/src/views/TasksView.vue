@@ -1,20 +1,21 @@
 <template>
   <div id="tasks-window">
     <CoursesList class="side-window" />
-    <!-- <ViewCoursesWindow class="main-window" /> -->
-    <AddTaskWindow class="main-window" />
+    <component :is="this.$store.state.tasksTabWindow" class="main-window" />
   </div>
 </template>
 <script lang="ts">
-import Vue from "vue";
 import CoursesList from "@/components/CoursesList.vue";
+import store from "@/store";
 import ViewCoursesWindow from "@/components/Tasks/ViewCoursesWindow.vue";
 import AddTaskWindow from "@/components/Tasks/AddTaskWindow.vue";
+import EditCourseWindow from "@/components/Tasks/EditCourseWindow.vue";
 export default {
   components: {
     CoursesList,
-    // ViewCoursesWindow,
+    ViewCoursesWindow,
     AddTaskWindow,
+    EditCourseWindow,
   },
 };
 </script>
@@ -53,7 +54,7 @@ export default {
   }
   .main-window {
     grid-area: main-window;
-    overflow: hidden;
+    overflow-y: scroll;
   }
 }
 </style>

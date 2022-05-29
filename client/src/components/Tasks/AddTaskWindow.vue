@@ -1,30 +1,37 @@
 <template>
   <div id="view-courses-window">
     <div id="header">
-      <h1>Course name</h1>
+      <h1>{{ this.$store.state.activeCourse }}</h1>
       <p id="course-description">Description for the course by the user</p>
       <div id="button-box">
-        <div class="button" id="discard">Discard task</div>
-        <div class="button" id="save">Save task</div>
+        <button class="button" @click="showTasks" id="discard">
+          Discard task
+        </button>
+        <button class="button" @click="saveTask" id="save">Save task</button>
       </div>
     </div>
     <div class="content">
       <label for="task-name">Task name:</label>
       <div class="inputarea">
-        <input type="text" id="task-name" />
+        <input type="text" id="task-name" v-model="taskname" />
       </div>
       <label for="description">Description:</label>
       <div class="inputarea">
-        <input type="text" name="description" id="description" />
+        <input
+          type="text"
+          name="description"
+          v-model="description"
+          id="description"
+        />
       </div>
       <label>Deadline:</label>
       <div class="inputarea" id="deadline">
-        <input type="datetime-local" name="date" id="date" />
+        <input type="datetime-local" name="date" id="date" v-model="date" />
         <p>repeats:</p>
-        <input type="checkbox" name="repeats" id="repeats" />
+        <input type="checkbox" name="repeats" id="repeats" v-model="repeats" />
         <p>every:</p>
-        <input type="number" name="count" id="count" />
-        <select name="period" id="period">
+        <input type="number" name="count" id="count" v-model="count" />
+        <select name="period" id="period" v-model="repeatPeriod">
           <option value="day">day</option>
           <option value="week">week</option>
           <option value="month">month</option>
@@ -32,13 +39,13 @@
       </div>
       <label>Points:</label>
       <div class="inputarea">
-        <input type="number" name="eap" id="eap" />
+        <input type="number" name="eap" id="eap" v-model="eap" />
       </div>
       <label>Time estimate:</label>
       <div class="inputarea">
-        <input type="number" name="hours" id="hours" />
+        <input type="number" name="hours" id="hours" v-model="hours" />
         <p>hours a</p>
-        <select name="period" id="period">
+        <select name="period" id="period" v-model="timePeriod">
           <option value="day">day</option>
           <option value="week">week</option>
           <option value="month">month</option>
@@ -46,13 +53,53 @@
       </div>
       <label>Groupwork:</label>
       <div class="inputarea">
-        <input type="checkbox" name="isgroupwork" id="isgroupwork" />
+        <input
+          type="checkbox"
+          name="isgroupwork"
+          id="isgroupwork"
+          v-model="isgroupwork"
+        />
       </div>
     </div>
   </div>
 </template>
 <script lang="ts">
-export default {};
+export default {
+  data() {
+    return {
+      taskname: "",
+      description: "",
+      date: "",
+      repeats: false,
+      count: 0,
+      repeatPeriod: "",
+      eap: 0,
+      hours: 0,
+      timePeriod: "",
+      isgroupwork: false,
+    };
+  },
+  methods: {
+    showTasks() {
+      this.$store.dispatch("showTasks");
+    },
+    saveTask() {
+      this.$store.commit("addTask", {
+        name: this.taskname,
+        description: this.description,
+        deadline: this.date,
+        repeats: this.repeats,
+        every: this.count,
+        period: this.repeatPeriod,
+        points: this.eap,
+        eta: this.hours,
+        etaPeriod: this.timePeriod,
+        groupwork: this.isgroupwork,
+      });
+      this.$store.dispatch("showTasks");
+    },
+  },
+};
 </script>
 <style lang="scss" scoped>
 #view-courses-window {
@@ -67,8 +114,8 @@ export default {};
       "course-description buttons" 30%
       / 80% 20%;
 
-    border-bottom: 0.3em solid;
-    border-color: gray;
+    border-bottom: 0.2em solid;
+    border-color: lightgray;
 
     h1 {
       grid-area: course-name;
