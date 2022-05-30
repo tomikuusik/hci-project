@@ -1,7 +1,7 @@
 node_modules
-src
-public
-README.md
-.gitignore
-.dockerignore
-Dockerfile
+# src
+# public
+# README.md
+# .gitignore
+# .dockerignore
+# Dockerfile

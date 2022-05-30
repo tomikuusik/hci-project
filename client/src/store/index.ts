@@ -9,6 +9,7 @@ declare interface Course {
   progress: number;
   startdate: string;
   enddate: string;
+  gradingsystem: Gradingsystem;
   tasks: Task[];
 }
 
@@ -25,6 +26,15 @@ declare interface Task {
   groupwork: boolean;
 }
 
+declare interface Gradingsystem {
+  gradable: boolean;
+  startA: number;
+  startB: number;
+  startC: number;
+  startD: number;
+  startE: number;
+}
+
 export default createStore({
   state: {
     activeCourse: "",
@@ -38,6 +48,14 @@ export default createStore({
         progress: 20,
         startdate: "2022",
         enddate: "2023",
+        gradingsystem: {
+          gradable: true,
+          startA: 90,
+          startB: 80,
+          startC: 70,
+          startD: 60,
+          startE: 50,
+        },
         tasks: [
           {
             name: "Paper prototype and heuristics",
@@ -72,6 +90,14 @@ export default createStore({
         progress: 40,
         startdate: "2022",
         enddate: "2023",
+        gradingsystem: {
+          gradable: true,
+          startA: 90,
+          startB: 80,
+          startC: 70,
+          startD: 60,
+          startE: 50,
+        },
         tasks: [
           {
             name: "Some course",
@@ -99,6 +125,14 @@ export default createStore({
           progress: 0,
           startdate: "Start date",
           enddate: "End Date",
+          gradingsystem: {
+            gradable: true,
+            startA: 90,
+            startB: 80,
+            startC: 70,
+            startD: 60,
+            startE: 50,
+          },
           tasks: [],
         };
         return emptyCourseBe;
