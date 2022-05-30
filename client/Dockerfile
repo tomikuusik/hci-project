@@ -4,6 +4,7 @@ WORKDIR /app
 
 ENV PATH="node_modules/.bin:$PATH"
 
+# RUN apk update && apk add bind-tools
 RUN npm install -g nodemon
 
 COPY . /app/
