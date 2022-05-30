@@ -12,9 +12,7 @@
 </template>
 <script lang="ts">
 import { useStore } from "vuex";
-import DeadlineDescription from "./DeadlineDescription.vue";
 export default {
-  components: { DeadlineDescription },
   computed: {
     activeCourse() {
       return this.$store.getters.activeCourse;

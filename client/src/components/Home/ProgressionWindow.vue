@@ -8,7 +8,7 @@
         :key="course.name"
       >
         <p class="description">{{ course.name }}</p>
-        <div class="progressbar">
+        <!-- <div class="progressbar">
           <div class="total"></div>
           <div
             class="progress"
@@ -17,15 +17,25 @@
               backgroundColor: getColor(course.progress),
             }"
           ></div>
-        </div>
+        </div> -->
+        <KProgress
+          :percent="course.progress"
+          :color="getColor(course.progress)"
+          :line-height="10"
+          :border="true"
+        />
       </div>
     </div>
   </div>
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";
+import KProgress from "k-progress-v3";
 
 export default defineComponent({
+  components: {
+    KProgress,
+  },
   methods: {
     getColor(points: number): string {
       if (points > 50) {

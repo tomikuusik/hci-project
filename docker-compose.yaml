@@ -1,6 +1,8 @@
 services:
   client:
     build: ./client
+    environment:
+      - NODE_ENV=development
     ports:
       - 8080:8080
     container_name: semester-tracking-client
