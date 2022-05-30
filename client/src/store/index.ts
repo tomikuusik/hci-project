@@ -7,7 +7,8 @@ declare interface Course {
   description: string;
   maxPoints: number;
   progress: number;
-  date: string;
+  startdate: string;
+  enddate: string;
   tasks: Task[];
 }
 
@@ -27,6 +28,7 @@ declare interface Task {
 export default createStore({
   state: {
     activeCourse: "",
+    activeCourseObject: {},
     tasksTabWindow: "ViewCoursesWindow",
     courses: [
       {
@@ -34,7 +36,8 @@ export default createStore({
         description: "Course desc",
         maxPoints: 100,
         progress: 20,
-        date: "2022 - 2023",
+        startdate: "2022",
+        enddate: "2023",
         tasks: [
           {
             name: "Paper prototype and heuristics",
@@ -67,7 +70,8 @@ export default createStore({
         description: "Course desc",
         maxPoints: 100,
         progress: 40,
-        date: "2022 - 2023",
+        startdate: "2022",
+        enddate: "2023",
         tasks: [
           {
             name: "Some course",
@@ -89,11 +93,12 @@ export default createStore({
     activeCourse(state) {
       if (state.activeCourse === "") {
         const emptyCourseBe: Course = {
-          name: "Course Name",
+          name: "",
           description: "Course Description",
           maxPoints: 100,
           progress: 0,
-          date: "Start date - End Date",
+          startdate: "Start date",
+          enddate: "End Date",
           tasks: [],
         };
         return emptyCourseBe;
@@ -117,6 +122,9 @@ export default createStore({
       });
       console.log(tasks);
       return tasks;
+    },
+    courses(state) {
+      return state.courses;
     },
   },
   mutations: {
@@ -145,6 +153,28 @@ export default createStore({
         }
       });
     },
+    removeCourse(state, courseName) {
+      console.log("Start the removal of " + courseName);
+      state.courses.forEach((el, index) => {
+        if (el.name === courseName) {
+          console.log("Found match: " + el + " courseName " + courseName);
+          state.courses.splice(index, index + 1);
+        }
+        console.log(this.getters.courses);
+      });
+    },
+    addCourse(state, course) {
+      state.courses.push(course);
+      console.log(this.getters.courses);
+    },
+    updateCourse(state, course) {
+      state.courses.forEach((el, index) => {
+        if (el === course) {
+          console.log("Found match: " + el.name + " courseName " + course.name);
+          state.courses[index] = course;
+        }
+      });
+    },
   },
   actions: {
     setTasksViewToAddTaskWindow({ commit }) {
@@ -152,11 +182,15 @@ export default createStore({
       console.log("Show add task window");
     },
     showTasks({ commit }) {
-      commit("setTasksViewWindow", "ViewCoursesWindow");
+      commit("setTasksViewWindow", "ViewCourseInfoWindow");
       console.log("Task discarded");
     },
-    showEditCourseWindow({ commit }) {
+    startEditingCourse({ commit }) {
       commit("setTasksViewWindow", "EditCourseWindow");
+    },
+    startAddingNewCourse({ commit }) {
+      commit("setTasksViewWindow", "EditCourseWindow");
+      commit("setActiveCourse", "");
     },
     setActiveCourseTo({ commit }, course) {
       commit("setActiveCourse", course);
@@ -167,6 +201,11 @@ export default createStore({
       const activeCourse = this.getters.activeCourse;
       activeCourse.progress += task.points;
       commit("removeTask", task);
+    },
+    discardCourse({ commit }, courseName) {
+      this.commit("removeCourse", courseName);
+      this.commit("setActiveCourse", "");
+      this.dispatch("showTasks");
     },
   },
   modules: {},

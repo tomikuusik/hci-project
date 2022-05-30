@@ -3,7 +3,7 @@
     <h2>Courses</h2>
     <div id="courses-list">
       <p
-        v-for="course in this.$store.state.courses"
+        v-for="course in courses"
         :key="course.name"
         class="course-name"
         @click="setActiveCourse(course.name)"
@@ -12,7 +12,7 @@
       </p>
       <button
         id="add-course"
-        @click="this.$store.dispatch('showEditCourseWindow')"
+        @click="this.$store.dispatch('startAddingNewCourse')"
       >
         <p>+</p>
       </button>
@@ -28,6 +28,11 @@ export default {
     },
     setActiveCourse(course: string) {
       this.$store.dispatch("setActiveCourseTo", course);
+    },
+  },
+  computed: {
+    courses() {
+      return this.$store.getters.courses;
     },
   },
 };

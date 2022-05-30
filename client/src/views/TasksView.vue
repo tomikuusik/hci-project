@@ -7,19 +7,20 @@
 <script lang="ts">
 import CoursesList from "@/components/CoursesList.vue";
 import store from "@/store";
-import ViewCoursesWindow from "@/components/Tasks/ViewCoursesWindow.vue";
+import ViewCourseInfoWindow from "@/components/Tasks/ViewCourseInfoWindow.vue";
 import AddTaskWindow from "@/components/Tasks/AddTaskWindow.vue";
 import EditCourseWindow from "@/components/Tasks/EditCourseWindow.vue";
 export default {
   components: {
     CoursesList,
-    ViewCoursesWindow,
+    ViewCourseInfoWindow,
     AddTaskWindow,
     EditCourseWindow,
   },
 };
 </script>
 <style lang="scss">
+button,
 .button {
   text-align: center;
   vertical-align: middle;

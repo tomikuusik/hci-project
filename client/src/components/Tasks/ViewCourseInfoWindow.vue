@@ -5,7 +5,9 @@
       <p id="course-description">{{ activeCourse.description }}</p>
       <p id="date">{{ this.$store.getters.activeCourse.date }}</p>
       <div id="button-box">
-        <div class="button">Edit Course</div>
+        <button @click="this.$store.dispatch('startEditingCourse')">
+          Edit Course
+        </button>
         <button @click="setWindowToAddTask" class="button">+ Add Task</button>
       </div>
     </div>

@@ -1,0 +1,9 @@
+services:
+  client:
+    build: ./client
+    environment:
+      - NODE_ENV=production
+    container_name: semester-tracking-client
+    volumes:
+      - './client:/app/'
+    command: npm run build -- --prod
