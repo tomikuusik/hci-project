@@ -7,5 +7,6 @@ services:
       - 8080:8080
     container_name: semester-tracking-client
     volumes:
-      - './client:/app/'
+      - './client/src:/app/src'
+      - './client/public:/app/public'
     command: npm run serve

@@ -6,6 +6,6 @@ ENV PATH="node_modules/.bin:$PATH"
 
 RUN npm install -g nodemon
 
-COPY ["package.json", "package-lock.json", "./"]
+COPY . /app/
 
 RUN npm i && npm cache clean --force
