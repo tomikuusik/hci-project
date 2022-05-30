@@ -1,6 +1,5 @@
 <template>
   <div id="tasks-window">
-    <CoursesList class="side-window" />
     <component :is="this.$store.state.tasksTabWindow" class="main-window" />
   </div>
 </template>
@@ -38,24 +37,6 @@ button,
   }
   &:active {
     cursor: grab;
-  }
-}
-
-#tasks-window {
-  display: grid;
-  grid-template-columns: 2% 20% 76% 2%;
-  grid-template-rows: 5% 90% 5%;
-  grid-template-areas:
-    ". . . ."
-    ". side-window main-window ."
-    ". . . .";
-
-  .side-window {
-    grid-area: side-window;
-  }
-  .main-window {
-    grid-area: main-window;
-    overflow-y: scroll;
   }
 }
 </style>

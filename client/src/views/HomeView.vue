@@ -1,11 +1,8 @@
 <template>
   <div class="home">
-    <h1>Welcome {{ username }}</h1>
-    <div id="windows">
-      <CalendarWindow class="window" />
-      <DeadlinesWindow class="window" />
-      <ProgressionWindow class="window" />
-    </div>
+    <CalendarWindow />
+    <DeadlinesWindow />
+    <ProgressionWindow />
   </div>
 </template>
 
@@ -27,42 +24,38 @@ export default defineComponent({
 
 <style lang="scss">
 .home {
-  color: black;
-  display: grid;
-  grid-template-rows: 10% 90%;
-  max-height: 100%;
-  max-width: 100%;
+  height: 100%;
+  display: inline-flex;
+  max-height: inherit;
+  justify-items: center;
+  width: 100%;
+  flex-wrap: wrap;
+  gap: 5em;
+
+  & > * {
+    flex-grow: 1;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  & h1 {
+    font-weight: bolder;
+  }
+
+  .window {
+    padding: 2em;
+    min-width: 10em;
+    width: 25em;
+    min-height: 25em;
+    height: fit-content;
+    display: inline-flex;
+    flex-direction: column;
+  }
 
   h1 {
-    place-self: center;
-  }
-  #windows {
-    display: grid;
-    grid-template-columns: repeat(3, 33%);
-    max-height: inherit;
-    justify-items: center;
-
-    .window {
-      height: 100%;
-      width: 100%;
-      display: inline-flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-
-      .cover {
-        width: 73%;
-        height: 53%;
-        background-color: white;
-        border-radius: 10px;
-        border: 1.5px solid lightgray;
-        overflow-y: scroll;
-      }
-
-      h1 {
-        height: 1.5em;
-      }
-    }
+    height: 1.5em;
   }
 }
 </style>

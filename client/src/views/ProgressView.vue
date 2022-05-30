@@ -1,6 +1,5 @@
 <template>
   <div id="tasks-window">
-    <CoursesList class="side-window" />
     <div class="main-window">
       <div id="header">
         <h1>{{ activeCourse.name }}</h1>
@@ -59,11 +58,7 @@
 </template>
 <script lang="ts">
 import Vue from "vue";
-import CoursesList from "@/components/CoursesList.vue";
 export default {
-  components: {
-    CoursesList,
-  },
   computed: {
     activeCourse() {
       return this.$store.getters.activeCourse;
@@ -121,17 +116,6 @@ button,
 }
 
 #tasks-window {
-  display: grid;
-  grid-template-columns: 2% 20% 76% 2%;
-  grid-template-rows: 5% 90% 5%;
-  grid-template-areas:
-    ". . . ."
-    ". side-window main-window ."
-    ". . . .";
-
-  .side-window {
-    grid-area: side-window;
-  }
   .main-window {
     grid-area: main-window;
     max-width: 100%;

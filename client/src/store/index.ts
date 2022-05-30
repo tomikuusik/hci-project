@@ -2,7 +2,7 @@ import AddTaskWindowVue from "@/components/Tasks/AddTaskWindow.vue";
 import { ComponentCustomProperties, toDisplayString } from "vue";
 import { createStore, mapActions, mapGetters, storeKey } from "vuex";
 
-declare interface Course {
+export interface Course {
   name: string;
   description: string;
   maxPoints: number;
@@ -13,7 +13,7 @@ declare interface Course {
   tasks: Task[];
 }
 
-declare interface Task {
+export interface Task {
   name: string;
   description: string;
   deadline: string;
@@ -26,7 +26,7 @@ declare interface Task {
   groupwork: boolean;
 }
 
-declare interface Gradingsystem {
+export interface Gradingsystem {
   gradable: boolean;
   startA: number;
   startB: number;
@@ -37,6 +37,7 @@ declare interface Gradingsystem {
 
 export default createStore({
   state: {
+    coursesListActive: false,
     activeCourse: "",
     activeCourseObject: {},
     tasksTabWindow: "ViewCoursesWindow",
@@ -116,6 +117,9 @@ export default createStore({
     ] as Course[],
   },
   getters: {
+    isCoursesListActive(state) {
+      return state.coursesListActive;
+    },
     activeCourse(state) {
       if (state.activeCourse === "") {
         const emptyCourseBe: Course = {

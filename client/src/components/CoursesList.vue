@@ -1,5 +1,5 @@
 <template>
-  <div id="courses-window">
+  <div>
     <h2>Courses</h2>
     <div id="courses-list">
       <p
@@ -38,13 +38,9 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-#courses-window {
+div {
   display: grid;
-
   padding: 2em 1em;
-  background-color: white;
-  border-radius: 10px;
-  border: 1.5px solid lightgray;
   display: inline-flex;
   flex-direction: column;
 

@@ -1,28 +1,17 @@
 <template>
   <div class="container">
     <h1>Progression</h1>
-    <div class="cover">
+    <div class="window">
       <div
         class="metrics"
         v-for="course in this.$store.state.courses"
         :key="course.name"
       >
         <p class="description">{{ course.name }}</p>
-        <!-- <div class="progressbar">
-          <div class="total"></div>
-          <div
-            class="progress"
-            :style="{
-              width: course.progress + '%',
-              backgroundColor: getColor(course.progress),
-            }"
-          ></div>
-        </div> -->
-        <KProgress
+        <a-progress
           :percent="course.progress"
-          :color="getColor(course.progress)"
-          :line-height="10"
-          :border="true"
+          :strokeWidth="10"
+          :strokeColor="getColor(course.progress)"
         />
       </div>
     </div>
@@ -30,11 +19,11 @@
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";
-import KProgress from "k-progress-v3";
+// import KProgress from "k-progress-v3";
 
 export default defineComponent({
   components: {
-    KProgress,
+    // KProgress,
   },
   methods: {
     getColor(points: number): string {
