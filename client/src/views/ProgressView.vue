@@ -60,7 +60,6 @@
 <script lang="ts">
 import Vue from "vue";
 import CoursesList from "@/components/CoursesList.vue";
-import { GradingSystem } from "@/store/index.ts";
 export default {
   components: {
     CoursesList,
@@ -70,7 +69,7 @@ export default {
       return this.$store.getters.activeCourse;
     },
     getGrade() {
-      let gradingsystem: GradingSystem = this.activeCourse.gradingsystem;
+      let gradingsystem = this.activeCourse.gradingsystem;
       var progress = this.activeCourse.progress;
       console.log(gradingsystem);
       if (!gradingsystem.gradable) {
